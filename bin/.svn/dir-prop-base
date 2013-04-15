@@ -1,0 +1,12 @@
+K 10
+svn:ignore
+V 91
+res
+AChartEngine.apk
+AndroidManifest.xml
+classes.dex
+resources.ap_
+jarlist.cache
+dexedLibs
+
+END

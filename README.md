@@ -1,0 +1,3 @@
+This AChartEngine Repository was forked from org.achartengine v1.1.0, the Android Charting Library. 
+
+Due to my own need for my project, I added a new XYChart named ColoredLineChart that inherits XYChart and combined features from CubicLineChart. The major purpose of ColoredLineChart is to color the Line based on positive or negative value in x series. The default color is Green for positive and Red for negative. In order to to determine the position of zero level within the chart, the data passed into series must start with (0,0).

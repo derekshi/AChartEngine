@@ -18,6 +18,7 @@ package org.achartengine;
 import org.achartengine.chart.BarChart;
 import org.achartengine.chart.BarChart.Type;
 import org.achartengine.chart.BubbleChart;
+import org.achartengine.chart.ColoredLineChart;
 import org.achartengine.chart.CombinedXYChart;
 import org.achartengine.chart.CubicLineChart;
 import org.achartengine.chart.DialChart;
@@ -68,6 +69,24 @@ public class ChartFactory {
     checkParameters(dataset, renderer);
     XYChart chart = new LineChart(dataset, renderer);
     return new GraphicalView(context, chart);
+  }
+  
+  /**
+   * Creates a colored line chart view.
+   * 
+   * @param context the context
+   * @param dataset the multiple series dataset (cannot be null)
+   * @param renderer the multiple series renderer (cannot be null)
+   * @return a line chart graphical view
+   * @throws IllegalArgumentException if dataset is null or renderer is null or
+   *           if the dataset and the renderer don't include the same number of
+   *           series
+   */
+  public static final GraphicalView getColoredLineChartView(Context context,
+      XYMultipleSeriesDataset dataset, XYMultipleSeriesRenderer renderer){
+    checkParameters(dataset, renderer);
+    XYChart xychart = new ColoredLineChart(dataset, renderer);
+    return new GraphicalView(context, xychart);
   }
 
   /**

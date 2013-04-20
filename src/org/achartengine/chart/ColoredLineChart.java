@@ -33,7 +33,7 @@ public class ColoredLineChart extends XYChart {
 	/** The legend shape width. */
 	private static final int SHAPE_WIDTH = 30;
 	
-	private static final int POSITIVE_COLOR = Color.GREEN;
+	private static final int POSITIVE_COLOR = Color.BLUE;
 	private static final int NEGATIVE_COLOR = Color.RED;
 	private static final int FILLCOLOR_ALPHA = 60;
 	
@@ -105,7 +105,6 @@ public class ColoredLineChart extends XYChart {
 		for(int i=5; i<endIndex; i+=2){
 			float prevY = points.get(i-2);
 			float currY = points.get(i);
-//			Log.v(TAG, "prevY: " + prevY + " currY: " + currY);
 			// Only check the previous value and current value are on opposite side of axisY
 			if (prevY >= zero && currY < zero || prevY <= zero && currY >zero){
 				
@@ -118,12 +117,10 @@ public class ColoredLineChart extends XYChart {
 					temp = getSepPoint(points.get(i-3), prevY, points.get(i-1), currY, zero);				
 					tempList.add(temp.x);
 					tempList.add(temp.y);
-//					Log.v(TAG, "midX: " + temp.x + " midY: " + temp.y);
 
 				}else{
 					temp = new PointF(points.get(i-3), prevY);
 				}
-//				Log.v(TAG, "index: " + i + " tempList: " + tempList);
 				seps.add(new DataColorSet(tempList, currColor, Color.argb(FILLCOLOR_ALPHA, Color.red(currColor), Color.green(currColor), Color.blue(currColor))));
 				startIndex = i-1;
 				if (currY <= zero) {
@@ -169,9 +166,9 @@ public class ColoredLineChart extends XYChart {
 	public void drawSeries(Canvas canvas, Paint paint, List<Float> points,
 	      SimpleSeriesRenderer seriesRenderer, float yAxisValue, int seriesIndex, int startIndex) {
 	    XYSeriesRenderer renderer = (XYSeriesRenderer) seriesRenderer;
-//	    float lineWidth = paint.getStrokeWidth();
 	    paint.setStrokeWidth(renderer.getLineWidth());
 	    final FillOutsideLine[] fillOutsideLine = renderer.getFillOutsideLine();
+	    
 	    List<DataColorSet> seps = getDataColorSets(points);
 	    for (int s=0; s< seps.size(); s++){
 	    	DataColorSet dcSet = seps.get(s);	    	
@@ -187,27 +184,7 @@ public class ColoredLineChart extends XYChart {
 		          fillPoints.addAll(dcSet.getData().subList(range[0] * 2, range[1] * 2));
 		        }
 	
-		        final float referencePoint;
-		        switch (fill.getType()) {
-		        case BOUNDS_ALL:
-		          referencePoint = yAxisValue;
-		          break;
-		        case BOUNDS_BELOW:
-		          referencePoint = yAxisValue;
-		          break;
-		        case BOUNDS_ABOVE:
-		          referencePoint = yAxisValue;
-		          break;
-		        case BELOW:
-		          referencePoint = canvas.getHeight();
-		          break;
-		        case ABOVE:
-		          referencePoint = 0;
-		          break;
-		        default:
-		          throw new RuntimeException(
-		              "You have added a new type of filling but have not implemented.");
-		        }
+		        final float referencePoint = yAxisValue;
 	       
 		        int length = fillPoints.size();
 		        fillPoints.set(0, fillPoints.get(0) + 1);
@@ -225,12 +202,24 @@ public class ColoredLineChart extends XYChart {
 		        drawPath(canvas, fillPoints, paint, true);
 		      }
 		    }
-		    paint.setColor(seriesRenderer.getColor());
-		    paint.setStyle(Style.STROKE);
-		    paint.setStrokeWidth(renderer.getLineWidth());	   
-		    drawPath(canvas, dcSet.getData(), paint, false);
-		   
+		    if (!renderer.isOutlineHidden()){
+    		    paint.setColor(seriesRenderer.getColor());
+    		    paint.setStyle(Style.STROKE);
+    		    paint.setStrokeWidth(renderer.getLineWidth());	   
+    		    drawPath(canvas, dcSet.getData(), paint, false);
+		    }
 	    }
+	    if (renderer.isPointed()){
+	        int l = points.size();
+	        paint.setStyle(Style.FILL);
+	        paint.setColor(renderer.getPointFillColor());
+	        canvas.drawCircle(points.get(l-2), points.get(l-1), renderer.getPointSize(), paint);
+	        paint.setStyle(Style.STROKE);
+	        paint.setStrokeWidth(3f);
+	        paint.setColor(seriesRenderer.getColor());
+	        canvas.drawCircle(points.get(l-2), points.get(l-1), renderer.getPointSize(), paint);
+	    }
+	    
 	    
 	}
 

@@ -38,7 +38,12 @@ public class XYSeriesRenderer extends SimpleSeriesRenderer {
   private float mPointStrokeWidth = 1;
   /** The chart line width. */
   private float mLineWidth = 1;
-
+  /** settings for ColoredLineChart  */
+  private boolean mPointed = false;
+  private int mPointFillColor = Color.argb(250, 209, 21, 78);
+  private boolean mOutlined = true;
+  private float mPointSize;
+  
   /**
    * A descriptor for the line fill behavior.
    */
@@ -71,7 +76,8 @@ public class XYSeriesRenderer extends SimpleSeriesRenderer {
     public int getColor() {
       return mColor;
     }
-
+    
+   
     /**
      * Sets the fill color
      * 
@@ -110,7 +116,38 @@ public class XYSeriesRenderer extends SimpleSeriesRenderer {
       mFillRange = range;
     }
   }
+  
+  public boolean isPointed(){
+    return mPointed;
+  }
 
+  public void setPointed(boolean pointed){
+    mPointed = pointed;
+  }
+  
+  public void setApplyOutline(boolean showOutline){
+    mOutlined = showOutline;
+  }
+  
+  public void setPointSize(float size){
+    mPointSize = size;
+  }
+  
+  public float getPointSize(){
+    return mPointSize;
+  }
+  
+  public boolean isOutlineHidden(){
+    return mOutlined == false;
+  }
+  
+  public int getPointFillColor(){
+    return mPointFillColor;
+  }
+  
+  public void setPointFillColor(int color){
+    mPointFillColor = color;
+  }
   /**
    * Returns if the chart should be filled below the line.
    * 

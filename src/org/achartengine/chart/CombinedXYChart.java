@@ -36,7 +36,18 @@ public class CombinedXYChart extends XYChart {
   private Class<?>[] xyChartTypes = new Class<?>[] { TimeChart.class, ColoredLineChart.class, LineChart.class, 
       CubicLineChart.class, BarChart.class, BubbleChart.class, ScatterChart.class,
       RangeBarChart.class, RangeStackedBarChart.class };
-
+  
+  public int totalCharts(){
+    return mCharts.length;
+  }
+  
+  public XYChart getChart(int position){
+    if (position < mCharts.length)
+      return mCharts[position];
+    else
+      return null;
+  }
+  
   /**
    * Builds a new combined XY chart instance.
    * 

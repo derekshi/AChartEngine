@@ -40,6 +40,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
+
 /**
  * The view that encapsulates the graphical chart.
  */
@@ -80,6 +81,7 @@ public class GraphicalView extends View {
   private float oldY;
   /** If the graphical view is drawn. */
   private boolean mDrawn;
+ 
 
   /**
    * Creates a new graphical view.
@@ -150,6 +152,10 @@ public class GraphicalView extends View {
     }
     return null;
   }
+  
+  public AbstractChart getChart(){
+    return mChart;
+  }
 
   @Override
   protected void onDraw(Canvas canvas) {
@@ -178,6 +184,7 @@ public class GraphicalView extends View {
       canvas.drawBitmap(fitZoomImage, left + width - zoomSize * 0.75f, buttonY, null);
     }
     mDrawn = true;
+   
   }
 
   /**

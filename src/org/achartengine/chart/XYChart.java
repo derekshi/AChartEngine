@@ -43,9 +43,11 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.PathEffect;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.util.Log;
 
 /**
  * The XY chart rendering class.
@@ -66,12 +68,27 @@ public abstract class XYChart extends AbstractChart {
   /** The calculated range. */
   private final Map<Integer, double[]> mCalcRange = new HashMap<Integer, double[]>();
 
+//  private GraphicListener mListener;
+//  
+//  public interface GraphicListener{
+//    public void onChartsDrawn(XYChart chart);
+//  }
+//  
+//  public void setGraphicListener(GraphicListener listener){
+//     mListener = listener; 
+//  }
+//  
   /**
    * The clickable areas for all points. The array index is the series index,
    * and the RectF list index is the point index in that series.
    */
   private Map<Integer, List<ClickableArea>> clickableAreas = new HashMap<Integer, List<ClickableArea>>();
-
+  
+//  /**
+//   * Store calculated points for XYChart in case we need to locate the data point on screen
+//   */
+//  private List<Float> points = new ArrayList<Float>();
+  
   protected XYChart() {
   }
 
@@ -92,6 +109,14 @@ public abstract class XYChart extends AbstractChart {
     mDataset = dataset;
     mRenderer = renderer;
   }
+  
+//  public PointF getScreenPoint(int dataPosition){
+//    Log.v("xychart tag", "points size: "+ points.size() + " p: "+ (dataPosition*2+1));
+//    if (dataPosition*2+1 < points.size()){
+//        return new PointF(points.get(dataPosition*2), points.get(dataPosition*2+1));
+//    }else
+//      return null;
+//}
 
   /**
    * The graphical representation of the XY chart.
@@ -268,7 +293,7 @@ public abstract class XYChart extends AbstractChart {
           // * (value.getValue().floatValue() - minY[scale])));
           values.add(value.getKey());
           values.add(value.getValue());
-
+          
           if (!isNullValue(yValue)) {
             points.add((float) (left + xPixelsPerUnit[scale] * (xValue - minX[scale])));
             points.add((float) (bottom - yPixelsPerUnit[scale] * (yValue - minY[scale])));
@@ -451,6 +476,8 @@ public abstract class XYChart extends AbstractChart {
     if (rotate) {
       transform(canvas, angle, true);
     }
+
+    
   }
 
   protected List<Double> getXLabels(double min, double max, int count) {

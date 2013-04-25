@@ -26,58 +26,23 @@ import android.util.Log;
  *
  */
 public class ColoredLineChart extends XYChart {
-	private static final String TAG = "ColoredLineChart";
-
+//	private static final String TAG = "ColoredLineChart";
 	/** The constant to identify this chart type. */
 	public static final String TYPE = "ColoredLine";
 	/** The legend shape width. */
 	private static final int SHAPE_WIDTH = 30;
 	
-	private static final int POSITIVE_COLOR = Color.BLUE;
-	private static final int NEGATIVE_COLOR = Color.RED;
-	private static final int FILLCOLOR_ALPHA = 60;
-	
-//	private float firstMultiplier;
-//	private float secondMultiplier;
-//	private PointF p1 = new PointF();
+	private static final int POSITIVE_COLOR = Color.argb(100, 87, 181, 230);
+	private static final int NEGATIVE_COLOR = Color.argb(100, 219, 93, 105);
+
 	private PointF p2 = new PointF();
-//	private PointF p3 = new PointF();
-//	private List<Float> mDataPoints = new ArrayList<Float>();
-	
-//	public class DataColorSet{
-//		private List<Float> mData;
-//		private int mStrokeColor;
-//		private int mFillColor;
-//		
-//		public DataColorSet(List<Float> lineData, int strokeColor, int fillColor){
-//			mData = lineData;
-//			mStrokeColor = strokeColor;
-//			mFillColor = fillColor;
-//		}
-//		
-//		public List<Float> getData(){
-//			return mData;
-//		}
-//		
-//		public int getStrokeColor()
-//		{
-//			return mStrokeColor;
-//		}
-//		
-//		public int getFillColor(){
-//			return mFillColor;
-//		}
-//	}
+	private Path p;
 	
 	ColoredLineChart(){
-//		firstMultiplier = 0.333f;
-//        secondMultiplier = 1 - firstMultiplier;
 	}
 	
 	public ColoredLineChart(XYMultipleSeriesDataset dataset, XYMultipleSeriesRenderer renderer) {
 		super(dataset, renderer);
-//		firstMultiplier = 0.333f;
-//		secondMultiplier = 1 - firstMultiplier;
 	}
 	
 	/**
@@ -91,66 +56,6 @@ public class ColoredLineChart extends XYChart {
 			super.setDatasetRenderer(dataset, renderer);
 			
 	}
-	
-	// first 2 values of points must start with position for (0,0) in order to get proper axisY position
-//	private List<DataColorSet> getDataColorSets(List<Float> points){
-//		List<DataColorSet> seps = new ArrayList<DataColorSet>();
-//		float zero = points.get(1); //first Y axis
-//		int startIndex = 0;
-//		int endIndex = points.size();
-//		int currColor;
-//		if (points.get(3) <= zero) currColor = POSITIVE_COLOR;
-//		else currColor = NEGATIVE_COLOR;
-//		
-//		PointF temp = new PointF(points.get(0), zero);
-//		for(int i=5; i<endIndex; i+=2){
-//			float prevY = points.get(i-2);
-//			float currY = points.get(i);
-//			// Only check the previous value and current value are on opposite side of axisY
-//			if (prevY >= zero && currY < zero || prevY <= zero && currY >zero){
-//				
-//				List<Float> tempList = new ArrayList<Float>(points.subList(startIndex, i-1));
-//				if (startIndex > 0){
-//					tempList.add(0, temp.y);
-//					tempList.add(0, temp.x);
-//				}
-//				if (prevY != zero){
-//					temp = getSepPoint(points.get(i-3), prevY, points.get(i-1), currY, zero);				
-//					tempList.add(temp.x);
-//					tempList.add(temp.y);
-//
-//				}else{
-//					temp = new PointF(points.get(i-3), prevY);
-//				}
-//				seps.add(new DataColorSet(tempList, currColor, Color.argb(FILLCOLOR_ALPHA, Color.red(currColor), Color.green(currColor), Color.blue(currColor))));
-//				startIndex = i-1;
-//				if (currY <= zero) {
-//					currColor = POSITIVE_COLOR;
-//				}
-//				else {
-//					currColor = NEGATIVE_COLOR;
-//				}
-//			}
-//		}
-//		
-//		if (startIndex == 0)
-//			seps.add(new DataColorSet(points, currColor, Color.argb(FILLCOLOR_ALPHA, Color.red(currColor), Color.green(currColor), Color.blue(currColor))));
-//		else{
-//			List<Float> lastList = new ArrayList<Float>(points.subList(startIndex, endIndex));
-//			lastList.add(0, temp.y);
-//			lastList.add(0, temp.x);
-//			seps.add(new DataColorSet(lastList, currColor, Color.argb(FILLCOLOR_ALPHA, Color.red(currColor), Color.green(currColor), Color.blue(currColor))));
-//		}
-//
-//		return seps;
-//	}
-	
-//	private PointF getSepPoint(float prevX, float prevY, float currX, float currY, float fixedY){
-//		float diffY = Math.abs(prevY - currY);
-//		float diffX = Math.abs(prevX - currX);
-//		float deltaX = Math.abs(prevY-fixedY)/diffY*diffX; 
-//		return new PointF(prevX+deltaX, fixedY);
-//	}
 	
 	
 	/**
@@ -169,104 +74,15 @@ public class ColoredLineChart extends XYChart {
 	      SimpleSeriesRenderer seriesRenderer, float yAxisValue, int seriesIndex, int startIndex) {
 	    XYSeriesRenderer renderer = (XYSeriesRenderer) seriesRenderer;
 	    paint.setStrokeWidth(renderer.getLineWidth());
-	    final FillOutsideLine[] fillOutsideLine = renderer.getFillOutsideLine();
-	        	
-	    for (FillOutsideLine fill : fillOutsideLine) {
-	      if (fill.getType() != FillOutsideLine.Type.NONE) {
-	        paint.setColor(fill.getColor());
-	        // TODO: find a way to do area charts without duplicating data
-	        List<Float> fillPoints = new ArrayList<Float>();
-	        int[] range = fill.getFillRange();
 
-	        if (range == null) {
-	            fillPoints.addAll(points);
-	        } else {
-	          fillPoints.addAll(points.subList(range[0] * 2, range[1] * 2));
-	        }
+	    drawPath(canvas, points, paint, false);
 
-	        final float referencePoint;
-	        switch (fill.getType()) {
-	        case BOUNDS_ALL:
-	          referencePoint = yAxisValue;
-	          break;
-	        case BOUNDS_BELOW:
-	          referencePoint = yAxisValue;
-	          break;
-	        case BOUNDS_ABOVE:
-	          referencePoint = yAxisValue;
-	          break;
-	        case BELOW:
-	          referencePoint = canvas.getHeight();
-	          break;
-	        case ABOVE:
-	          referencePoint = 0;
-	          break;
-	        default:
-	          throw new RuntimeException(
-	              "You have added a new type of filling but have not implemented.");
-	        }
-	        if (fill.getType() == FillOutsideLine.Type.BOUNDS_ABOVE
-	            || fill.getType() == FillOutsideLine.Type.BOUNDS_BELOW) {
-	          List<Float> boundsPoints = new ArrayList<Float>();
-	          boolean add = false;
-	          if (fill.getType() == FillOutsideLine.Type.BOUNDS_ABOVE
-	              && fillPoints.get(1) < referencePoint
-	              || fill.getType() == FillOutsideLine.Type.BOUNDS_BELOW
-	              && fillPoints.get(1) > referencePoint) {
-	            boundsPoints.add(fillPoints.get(0));
-	            boundsPoints.add(fillPoints.get(1));
-	            add = true;
-	          }
-
-	          for (int i = 3; i < fillPoints.size(); i += 2) {
-	            float prevValue = fillPoints.get(i - 2);
-	            float value = fillPoints.get(i);
-
-	            if (prevValue < referencePoint && value > referencePoint || prevValue > referencePoint
-	                && value < referencePoint) {
-	              float prevX = fillPoints.get(i - 3);
-	              float x = fillPoints.get(i - 1);
-	              boundsPoints.add(prevX + (x - prevX) * (referencePoint - prevValue)
-	                  / (value - prevValue));
-	              boundsPoints.add(referencePoint);
-	              if (fill.getType() == FillOutsideLine.Type.BOUNDS_ABOVE && value > referencePoint
-	                  || fill.getType() == FillOutsideLine.Type.BOUNDS_BELOW && value < referencePoint) {
-	                i += 2;
-	                add = false;
-	              } else {
-	                boundsPoints.add(x);
-	                boundsPoints.add(value);
-	                add = true;
-	              }
-	            } else {
-	              if (add || fill.getType() == FillOutsideLine.Type.BOUNDS_ABOVE
-	                  && value < referencePoint || fill.getType() == FillOutsideLine.Type.BOUNDS_BELOW
-	                  && value > referencePoint) {
-	                boundsPoints.add(fillPoints.get(i - 1));
-	                boundsPoints.add(value);
-	              }
-	            }
-	          }
-
-	          fillPoints.clear();
-	          fillPoints.addAll(boundsPoints);
-	        }
-	        int length = fillPoints.size();
-	        fillPoints.set(0, fillPoints.get(0) + 1);
-	        fillPoints.add(fillPoints.get(length - 2));
-	        fillPoints.add(referencePoint);
-	        fillPoints.add(fillPoints.get(0));
-	        fillPoints.add(fillPoints.get(length + 1));
-	        for (int i = 0; i < length + 4; i += 2) {
-	          if (fillPoints.get(i + 1) < 0) {
-	            fillPoints.set(i + 1, 0f);
-	          }
-	        }
-
-	        paint.setStyle(Style.FILL);
-	        drawPath(canvas, fillPoints, paint, true);
-	      }
-	    }
+  	    paint.setColor(seriesRenderer.getColor());
+  	    paint.setStyle(Style.STROKE);
+  	    paint.setStrokeWidth(renderer.getLineWidth());
+  	    outlinePath(canvas, paint);
+	    	    
+        
 	    if (renderer.isPointed()){
 	        int l = points.size();
 	        paint.setStyle(Style.FILL);
@@ -337,7 +153,7 @@ public class ColoredLineChart extends XYChart {
 	  
 	  @Override
 	  protected void drawPath(Canvas canvas, List<Float> points, Paint paint, boolean circular) {
-	    Path p = new Path();
+	    p = new Path();
 	    float x = points.get(0);
 	    float y = points.get(1);
 	    p.moveTo(x, y);
@@ -352,13 +168,7 @@ public class ColoredLineChart extends XYChart {
 	    
 	    for (int i = 0; i < length-2; i += 2) {
 	      int nextIndex = i + 2 < length ? i + 2 : i;
-//	      int nextNextIndex = i + 4 < length ? i + 4 : nextIndex;
-//	      calc(points, p1, i, nextIndex, secondMultiplier);
 	      p2.set(points.get(nextIndex), points.get(nextIndex + 1));
-//	      calc(points, p3, nextIndex, nextNextIndex, firstMultiplier);
-	      // From last point, approaching x1/y1 and x2/y2 and ends up at x3/y3
-//	       Log.v(TAG, "controller1: " + i+ " x: "+controllers1.get(i)+" y:"+controllers1.get(i+1));
-	       Log.v(TAG, i+ " x: "+p2.x+" y:"+p2.y);	       
 	      p.cubicTo(controllers1.get(i), controllers1.get(i+1), controllers2.get(i), controllers2.get(i+1), p2.x, p2.y);
 
 	    }
@@ -368,19 +178,36 @@ public class ColoredLineChart extends XYChart {
 	      }
 	      p.lineTo(points.get(0), points.get(1));
 	    }
-	    canvas.drawPath(p, paint);
+	    canvas.save();
+	    
+	    fillPath(canvas, paint, points.get(1), points.get(length-2));
 	  }
+	  
+	  private void fillPath(Canvas canvas, Paint paint, float yAxisValue, float right){
+	  //add fills
+        Path fillPath = new Path(p);
+        fillPath.lineTo(right, yAxisValue);
 
-//	  private void calc(List<Float> points, PointF result, int index1, int index2, final float multiplier) {
-//	    float p1x = points.get(index1);
-//	    float p1y = points.get(index1 + 1);
-//	    float p2x = points.get(index2);
-//	    float p2y = points.get(index2 + 1);
-//
-//	    float diffX = p2x - p1x; // p2.x - p1.x;
-//	    float diffY = p2y - p1y; // p2.y - p1.y;
-//	    result.set(p1x + (diffX * multiplier), p1y + (diffY * multiplier));
-//	  }
+        //add positive color
+        canvas.clipRect(0, 0, right, yAxisValue);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(POSITIVE_COLOR);
+        canvas.drawPath(fillPath, paint);
+        canvas.restore();
+        canvas.save();
+        
+        //add negative color
+        canvas.clipRect(0, yAxisValue, right, yAxisValue*2);
+        paint.setColor(NEGATIVE_COLOR);
+        canvas.drawPath(fillPath, paint);
+        canvas.restore();
+        canvas.save();
+	  }
+	  
+	  private void outlinePath(Canvas canvas, Paint paint){
+	    canvas.drawPath(p, paint);
+	    canvas.restore();
+	  }
 	  
 	  private float[] buildControlPoints(float[] rhs, int n){
 	    float[] x = new float[n];

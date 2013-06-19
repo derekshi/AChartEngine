@@ -7,7 +7,6 @@ import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer.FillOutsideLine;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,7 +15,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.util.Log;
 
 /**
  * ColoredLineChart is similar to CubicLineChart 
@@ -26,7 +24,11 @@ import android.util.Log;
  *
  */
 public class ColoredLineChart extends XYChart {
-//	private static final String TAG = "ColoredLineChart";
+/**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  //	private static final String TAG = "ColoredLineChart";
 	/** The constant to identify this chart type. */
 	public static final String TYPE = "ColoredLine";
 	/** The legend shape width. */
@@ -74,9 +76,9 @@ public class ColoredLineChart extends XYChart {
 	      SimpleSeriesRenderer seriesRenderer, float yAxisValue, int seriesIndex, int startIndex) {
 	    XYSeriesRenderer renderer = (XYSeriesRenderer) seriesRenderer;
 	    paint.setStrokeWidth(renderer.getLineWidth());
-
 	    drawPath(canvas, points, paint, false);
-
+	    fillPath(canvas, paint, yAxisValue,points.get(0), points.get(points.size()-2));
+	    
   	    paint.setColor(seriesRenderer.getColor());
   	    paint.setStyle(Style.STROKE);
   	    paint.setStrokeWidth(renderer.getLineWidth());
@@ -94,21 +96,6 @@ public class ColoredLineChart extends XYChart {
 	        canvas.drawCircle(points.get(l-2), points.get(l-1), renderer.getPointSize(), paint);
 	    }
 	    
-//	    if (renderer instanceof OverlayRenderer){
-//	      OverlayRenderer xrenderer = (OverlayRenderer)renderer;
-//	      int[] overlay = xrenderer.getOverlayData();
-//	      int[] resources = xrenderer.getResources();
-//	      for(int i=0; i<overlay.length; i++){
-//	        int val = overlay[i];
-//	        if (val > 0){
-//	          Resources r = xrenderer.getContext().getResources();
-//	          Bitmap res = BitmapFactory.decodeResource(r, resources[val]);
-//	          float pointx = points.get(i*2)-20;
-//	          float pointy = points.get(i*2+1)-20;
-//	          canvas.drawBitmap(res, pointx, pointy, null);
-//	        }
-//	      }
-//	    }
 	}
 
 
@@ -180,13 +167,15 @@ public class ColoredLineChart extends XYChart {
 	    }
 	    canvas.save();
 	    
-	    fillPath(canvas, paint, points.get(1), points.get(length-2));
 	  }
 	  
-	  private void fillPath(Canvas canvas, Paint paint, float yAxisValue, float right){
-	  //add fills
+	  private void fillPath(Canvas canvas, Paint paint, float yAxisValue, float left, float right)
+	  {
+	    //add fills
         Path fillPath = new Path(p);
         fillPath.lineTo(right, yAxisValue);
+        fillPath.lineTo(left, yAxisValue);
+        fillPath.close();
 
         //add positive color
         canvas.clipRect(0, 0, right, yAxisValue);
@@ -214,21 +203,22 @@ public class ColoredLineChart extends XYChart {
 	    float[] tmp = new float[n];
 	    float b = 2f;
 	    x[0] = rhs[0]/b;
-	    for(int i=1; i<n; i++){ //decomposition and forward subsitition
+	    for(int i=1; i<n; i++){ //decomposition and forward substitution
 	      tmp[i] = 1/b;
 	      b = (i < n-1 ? 4f : 3.5f) - tmp[i];
 	      x[i] = (rhs[i] - x[i-1])/b;
 	    }
 	    
 	    for(int i=1; i<n; i++){
-	      x[n-i-1] -= tmp[n-i]*x[n-i]; //backsubstitution
+	      x[n-i-1] -= tmp[n-i]*x[n-i]; //back substitution
 	    }
 	    return x;
 	  }
 	  
 	  private void getControlPoints(List<Float> points, List<Float> controller1, List<Float> controller2){
 	    int n = points.size()-2;
-	    if (n<=2) return;
+	    if (n<2) return;
+	    
 	    float[] knots = new float[points.size()];
 	    int k=0;
 	    for (Float val: points){

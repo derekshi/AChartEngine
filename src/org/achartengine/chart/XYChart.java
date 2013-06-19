@@ -43,11 +43,9 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.PathEffect;
-import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.util.Log;
 
 /**
  * The XY chart rendering class.
@@ -270,7 +268,7 @@ public abstract class XYChart extends AbstractChart {
 
       List<Float> points = new ArrayList<Float>();
       List<Double> values = new ArrayList<Double>();
-      float yAxisValue = Math.min(bottom, (float) (bottom + yPixelsPerUnit[scale] * minY[scale]));
+      float yAxisValue = bottom/2f; //Math.min(bottom, (float) (bottom + yPixelsPerUnit[scale] * minY[scale]));
       LinkedList<ClickableArea> clickableArea = new LinkedList<ClickableArea>();
 
       clickableAreas.put(i, clickableArea);

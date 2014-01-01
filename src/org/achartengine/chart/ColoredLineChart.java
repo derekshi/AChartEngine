@@ -40,8 +40,7 @@ public class ColoredLineChart extends XYChart {
 	private PointF p2 = new PointF();
 	private Path p;
 	
-	ColoredLineChart(){
-	}
+	ColoredLineChart() {}
 	
 	public ColoredLineChart(XYMultipleSeriesDataset dataset, XYMultipleSeriesRenderer renderer) {
 		super(dataset, renderer);

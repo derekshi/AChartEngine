@@ -83,7 +83,6 @@ public class ColoredLineChart extends XYChart {
   	    paint.setStyle(Style.STROKE);
   	    paint.setStrokeWidth(renderer.getLineWidth());
   	    outlinePath(canvas, paint);
-	    	    
         
 	    if (renderer.isPointed()){
 	        int l = points.size();

@@ -37,6 +37,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -323,6 +324,7 @@ public class GraphicalView extends View {
     mHandler.post(new Runnable() {
       public void run() {
         invalidate(left, top, right, bottom);
+        Log.i("ACHART", "chart is repainting");
       }
     });
   }

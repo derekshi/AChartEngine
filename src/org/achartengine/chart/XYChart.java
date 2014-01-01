@@ -101,20 +101,12 @@ public abstract class XYChart extends AbstractChart {
     mRenderer = renderer;
   }
 
-  // TODO: javadoc
   protected void setDatasetRenderer(XYMultipleSeriesDataset dataset,
       XYMultipleSeriesRenderer renderer) {
     mDataset = dataset;
     mRenderer = renderer;
   }
-  
-//  public PointF getScreenPoint(int dataPosition){
-//    Log.v("xychart tag", "points size: "+ points.size() + " p: "+ (dataPosition*2+1));
-//    if (dataPosition*2+1 < points.size()){
-//        return new PointF(points.get(dataPosition*2), points.get(dataPosition*2+1));
-//    }else
-//      return null;
-//}
+
 
   /**
    * The graphical representation of the XY chart.
@@ -244,6 +236,12 @@ public abstract class XYChart extends AbstractChart {
       if (maxY[i] - minY[i] != 0) {
         yPixelsPerUnit[i] = (float) ((bottom - top) / (maxY[i] - minY[i]));
       }
+        // the X axis on multiple scales was wrong without this fix
+        if (i > 0) {
+            xPixelsPerUnit[i] = xPixelsPerUnit[0];
+            minX[i] = minX[0];
+            maxX[i] = maxX[0];
+        }
     }
 
     boolean hasValues = false;
@@ -313,6 +311,7 @@ public abstract class XYChart extends AbstractChart {
           }
         }
 
+        //Draw annotations
         int count = series.getAnnotationCount();
         if (count > 0) {
           paint.setColor(mRenderer.getLabelsColor());
@@ -367,9 +366,9 @@ public abstract class XYChart extends AbstractChart {
         paint.setColor(mRenderer.getXLabelsColor());
         paint.setTextSize(mRenderer.getLabelsTextSize());
         paint.setTextAlign(mRenderer.getXLabelsAlign());
-        if (mRenderer.getXLabelsAlign() == Align.LEFT) {
-          xLabelsLeft += mRenderer.getLabelsTextSize() / 4;
-        }
+//        if (mRenderer.getXLabelsAlign() == Align.LEFT) {
+//          xLabelsLeft += mRenderer.getLabelsTextSize() / 4;
+//        }
       }
       drawXLabels(xLabels, mRenderer.getXTextLabelLocations(), canvas, paint, xLabelsLeft, top,
           bottom, xPixelsPerUnit[0], minX[0], maxX[0]);

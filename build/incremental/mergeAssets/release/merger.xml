@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/derekshi/Documents/ref/achartengine/src/main/assets" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/Users/derekshi/Documents/ref/achartengine/src/release/assets" />
+    </dataSet>
+
+</merger>

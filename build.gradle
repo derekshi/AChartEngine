@@ -3,33 +3,31 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.4'
+        classpath 'com.android.tools.build:gradle:0.7+'
     }
 }
+
 apply plugin: 'android-library'
 
-dependencies {
+repositories {
+	mavenCentral()
 }
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "17"
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 17
+        minSdkVersion 14
+        targetSdkVersion 19
     }
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['demo','test','src']
-            resources.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
-        }
 
-        instrumentTest.setRoot('tests')
-    }
+	sourceSets {
+	     main {
+	       	manifest.srcFile 'AndroidManifest.xml'
+	        java.srcDirs = ['src']
+	        res.srcDirs = ['res']
+	     }
+	}
+    
 }

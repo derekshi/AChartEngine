@@ -3,6 +3,7 @@ package org.achartengine.chart;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
@@ -28,7 +29,7 @@ public class ColoredLineChart extends XYChart {
    * 
    */
   private static final long serialVersionUID = 1L;
-  //	private static final String TAG = "ColoredLineChart";
+  	private static final String TAG = "ColoredLineChart";
 	/** The constant to identify this chart type. */
 	public static final String TYPE = "ColoredLine";
 	/** The legend shape width. */
@@ -142,7 +143,6 @@ public class ColoredLineChart extends XYChart {
 	    float x = points.get(0);
 	    float y = points.get(1);
 	    p.moveTo(x, y);
-
 	    int length = points.size();
 	    if (circular) {
 	      length -= 4;

@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.SortedMap;
 
+import android.util.Log;
 import org.achartengine.model.Point;
 import org.achartengine.model.SeriesSelection;
 import org.achartengine.model.XYMultipleSeriesDataset;
@@ -266,7 +267,7 @@ public abstract class XYChart extends AbstractChart {
 
       List<Float> points = new ArrayList<Float>();
       List<Double> values = new ArrayList<Double>();
-      float yAxisValue = bottom/2f; //Math.min(bottom, (float) (bottom + yPixelsPerUnit[scale] * minY[scale]));
+      float yAxisValue = (top+bottom)/2; // Math.min((top+bottom)/2, (float)(top + bottom + yPixelsPerUnit[scale] * minY[scale])/2);
       LinkedList<ClickableArea> clickableArea = new LinkedList<ClickableArea>();
 
       clickableAreas.put(i, clickableArea);
@@ -329,6 +330,7 @@ public abstract class XYChart extends AbstractChart {
           }
         }
 
+        //Draw data points
         if (points.size() > 0) {
           drawSeries(series, canvas, paint, points, seriesRenderer, yAxisValue, i, or, startIndex);
           ClickableArea[] clickableAreasForSubSeries = clickableAreasForPoints(points, values,
@@ -689,15 +691,15 @@ public abstract class XYChart extends AbstractChart {
    */
   protected void drawXLabels(List<Double> xLabels, Double[] xTextLabelLocations, Canvas canvas,
       Paint paint, int left, int top, int bottom, double xPixelsPerUnit, double minX, double maxX) {
-    int length = xLabels.size();
+      int length = xLabels.size();
     boolean showLabels = mRenderer.isShowLabels();
     boolean showGridY = mRenderer.isShowGridY();
     for (int i = 0; i < length; i++) {
       double label = xLabels.get(i);
       float xLabel = (float) (left + xPixelsPerUnit * (label - minX));
       if (showLabels) {
-        paint.setColor(mRenderer.getXLabelsColor());
-        canvas.drawLine(xLabel, bottom, xLabel, bottom + mRenderer.getLabelsTextSize() / 3, paint);
+          paint.setColor(mRenderer.getXLabelsColor());
+//        canvas.drawLine(xLabel, bottom, xLabel, bottom + mRenderer.getLabelsTextSize() / 3, paint);
         drawText(canvas, getLabel(mRenderer.getLabelFormat(), label), xLabel,
             bottom + mRenderer.getLabelsTextSize() * 4 / 3 + mRenderer.getXLabelsPadding(), paint,
             mRenderer.getXLabelsAngle());
@@ -794,13 +796,12 @@ public abstract class XYChart extends AbstractChart {
       double maxX) {
     boolean showCustomTextGrid = mRenderer.isShowCustomTextGrid();
     if (showLabels) {
-      paint.setColor(mRenderer.getXLabelsColor());
+        paint.setColor(mRenderer.getXLabelsColor());
       for (Double location : xTextLabelLocations) {
         if (minX <= location && location <= maxX) {
           float xLabel = (float) (left + xPixelsPerUnit * (location.doubleValue() - minX));
           paint.setColor(mRenderer.getXLabelsColor());
-          canvas
-              .drawLine(xLabel, bottom, xLabel, bottom + mRenderer.getLabelsTextSize() / 3, paint);
+//          canvas.drawLine(xLabel, bottom, xLabel, bottom + mRenderer.getLabelsTextSize() / 3, paint);
           drawText(canvas, mRenderer.getXTextLabel(location), xLabel,
               bottom + mRenderer.getLabelsTextSize() * 4 / 3, paint, mRenderer.getXLabelsAngle());
           if (showCustomTextGrid) {

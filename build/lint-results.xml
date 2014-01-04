@@ -57,7 +57,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="67"
+            line="68"
             column="53"/>
     </issue>
 
@@ -77,7 +77,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="67"
+            line="68"
             column="53"/>
     </issue>
 
@@ -97,7 +97,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="83"
+            line="84"
             column="62"/>
     </issue>
 
@@ -117,7 +117,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="83"
+            line="84"
             column="62"/>
     </issue>
 
@@ -137,7 +137,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="252"
+            line="253"
             column="22"/>
     </issue>
 
@@ -157,7 +157,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="252"
+            line="253"
             column="22"/>
     </issue>
 
@@ -177,7 +177,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="485"
+            line="486"
             column="45"/>
     </issue>
 
@@ -197,7 +197,7 @@ If you need to construct a `HashMap` because you need to call an API outside of 
         errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java"
-            line="485"
+            line="486"
             column="45"/>
     </issue>
 

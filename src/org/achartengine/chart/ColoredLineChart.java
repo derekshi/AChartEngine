@@ -150,13 +150,18 @@ public class ColoredLineChart extends XYChart {
 	    List<Float> controllers1 = new ArrayList<Float>();
 	    List<Float> controllers2 = new ArrayList<Float>();
 	    getControlPoints(points, controllers1, controllers2);
-	    
-	    for (int i = 0; i < length-2; i += 2) {
-	      int nextIndex = i + 2 < length ? i + 2 : i;
-	      p2.set(points.get(nextIndex), points.get(nextIndex + 1));
-	      p.cubicTo(controllers1.get(i), controllers1.get(i+1), controllers2.get(i), controllers2.get(i+1), p2.x, p2.y);
 
-	    }
+        // handle only 2 data points
+        if (length == 4) {
+           p.lineTo(points.get(2), points.get(3));
+        } else {
+            for (int i = 0; i < length-2; i += 2) {
+              int nextIndex = i + 2 < length ? i + 2 : i;
+              p2.set(points.get(nextIndex), points.get(nextIndex + 1));
+              p.cubicTo(controllers1.get(i), controllers1.get(i+1), controllers2.get(i), controllers2.get(i+1), p2.x, p2.y);
+            }
+        }
+
 	    if (circular) {
 	      for (int i = length; i < length + 4; i += 2) {
 	        p.lineTo(points.get(i), points.get(i + 1));

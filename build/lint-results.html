@@ -18,7 +18,7 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Mon Jan 13 20:13:12 PST 2014.<br/>
+Check performed at Tue Jan 14 13:31:29 PST 2014.<br/>
 0 errors and 16 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
@@ -98,69 +98,69 @@ Therefore, you should either use the form of the SimpleDateFormat constructor wh
 <div class="id"><a href="#" title="Return to top">UseSparseArrays: HashMap can be replaced with SparseArray</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:67</span>: <span class="message">Use new SparseArray&lt;double[]>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno">  64</span>   /** The visible chart area, in screen coordinates. */
-<span class="lineno">  65</span>   private Rect mScreenR;
-<span class="lineno">  66</span>   /** The calculated range. */
-<span class="lineno">  67</span>   private final Map&lt;Integer, double[]> mCalcRange = <span class="errorspan">new HashMap&lt;Integer, double[]>();</span>
-<span class="lineno">  68</span> 
-<span class="lineno">  69</span> //  private GraphicListener mListener;
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:68</span>: <span class="message">Use new SparseArray&lt;double[]>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno">  65</span>   /** The visible chart area, in screen coordinates. */
+<span class="lineno">  66</span>   private Rect mScreenR;
+<span class="lineno">  67</span>   /** The calculated range. */
+<span class="lineno">  68</span>   private final Map&lt;Integer, double[]> mCalcRange = <span class="errorspan">new HashMap&lt;Integer, double[]>();</span>
+<span class="lineno">  69</span> 
+<span class="lineno">  70</span> //  private GraphicListener mListener;
 </pre>
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:67</span>: <span class="message">Use new SparseArray&lt;double[]>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno">  64</span>   /** The visible chart area, in screen coordinates. */
-<span class="lineno">  65</span>   private Rect mScreenR;
-<span class="lineno">  66</span>   /** The calculated range. */
-<span class="lineno">  67</span>   private final Map&lt;Integer, double[]> mCalcRange = <span class="errorspan">new HashMap&lt;Integer, double[]>();</span>
-<span class="lineno">  68</span> 
-<span class="lineno">  69</span> //  private GraphicListener mListener;
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:68</span>: <span class="message">Use new SparseArray&lt;double[]>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno">  65</span>   /** The visible chart area, in screen coordinates. */
+<span class="lineno">  66</span>   private Rect mScreenR;
+<span class="lineno">  67</span>   /** The calculated range. */
+<span class="lineno">  68</span>   private final Map&lt;Integer, double[]> mCalcRange = <span class="errorspan">new HashMap&lt;Integer, double[]>();</span>
+<span class="lineno">  69</span> 
+<span class="lineno">  70</span> //  private GraphicListener mListener;
 </pre>
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:83</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno">  80</span>    * The clickable areas for all points. The array index is the series index,
-<span class="lineno">  81</span>    * and the RectF list index is the point index in that series.
-<span class="lineno">  82</span>    */
-<span class="lineno">  83</span>   private Map&lt;Integer, List&lt;ClickableArea>> clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
-<span class="lineno">  84</span>   
-<span class="lineno">  85</span> //  /**
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:84</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno">  81</span>    * The clickable areas for all points. The array index is the series index,
+<span class="lineno">  82</span>    * and the RectF list index is the point index in that series.
+<span class="lineno">  83</span>    */
+<span class="lineno">  84</span>   private Map&lt;Integer, List&lt;ClickableArea>> clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
+<span class="lineno">  85</span>   
+<span class="lineno">  86</span> //  /**
 </pre>
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:83</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno">  80</span>    * The clickable areas for all points. The array index is the series index,
-<span class="lineno">  81</span>    * and the RectF list index is the point index in that series.
-<span class="lineno">  82</span>    */
-<span class="lineno">  83</span>   private Map&lt;Integer, List&lt;ClickableArea>> clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
-<span class="lineno">  84</span>   
-<span class="lineno">  85</span> //  /**
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:84</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno">  81</span>    * The clickable areas for all points. The array index is the series index,
+<span class="lineno">  82</span>    * and the RectF list index is the point index in that series.
+<span class="lineno">  83</span>    */
+<span class="lineno">  84</span>   private Map&lt;Integer, List&lt;ClickableArea>> clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
+<span class="lineno">  85</span>   
+<span class="lineno">  86</span> //  /**
 </pre>
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:252</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno"> 249</span>     // 1) Avoid a large contiguous memory allocation
-<span class="lineno"> 250</span>     // 2) We don't need random seeking, only sequential reading/writing, so
-<span class="lineno"> 251</span>     // linked list makes sense
-<span class="lineno"> 252</span>     clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
-<span class="lineno"> 253</span>     for (int i = 0; i &lt; sLength; i++) {
-<span class="lineno"> 254</span>       XYSeries series = mDataset.getSeriesAt(i);
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:253</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno"> 250</span>     // 1) Avoid a large contiguous memory allocation
+<span class="lineno"> 251</span>     // 2) We don't need random seeking, only sequential reading/writing, so
+<span class="lineno"> 252</span>     // linked list makes sense
+<span class="lineno"> 253</span>     clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
+<span class="lineno"> 254</span>     for (int i = 0; i &lt; sLength; i++) {
+<span class="lineno"> 255</span>       XYSeries series = mDataset.getSeriesAt(i);
 </pre>
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:252</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno"> 249</span>     // 1) Avoid a large contiguous memory allocation
-<span class="lineno"> 250</span>     // 2) We don't need random seeking, only sequential reading/writing, so
-<span class="lineno"> 251</span>     // linked list makes sense
-<span class="lineno"> 252</span>     clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
-<span class="lineno"> 253</span>     for (int i = 0; i &lt; sLength; i++) {
-<span class="lineno"> 254</span>       XYSeries series = mDataset.getSeriesAt(i);
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:253</span>: <span class="message">Use new SparseArray&lt;List&lt;ClickableArea>>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno"> 250</span>     // 1) Avoid a large contiguous memory allocation
+<span class="lineno"> 251</span>     // 2) We don't need random seeking, only sequential reading/writing, so
+<span class="lineno"> 252</span>     // linked list makes sense
+<span class="lineno"> 253</span>     clickableAreas = <span class="errorspan">new HashMap&lt;Integer, List&lt;ClickableArea>>();</span>
+<span class="lineno"> 254</span>     for (int i = 0; i &lt; sLength; i++) {
+<span class="lineno"> 255</span>       XYSeries series = mDataset.getSeriesAt(i);
 </pre>
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:506</span>: <span class="message">Use new SparseArray&lt;List&lt;Double>>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno"> 503</span>   }
-<span class="lineno"> 504</span> 
-<span class="lineno"> 505</span>   protected Map&lt;Integer, List&lt;Double>> getYLabels(double[] minY, double[] maxY, int maxScaleNumber) {
-<span class="lineno"> 506</span>     Map&lt;Integer, List&lt;Double>> allYLabels = <span class="errorspan">new HashMap&lt;Integer, List&lt;Double>>();</span>
-<span class="lineno"> 507</span>     for (int i = 0; i &lt; maxScaleNumber; i++) {
-<span class="lineno"> 508</span>       allYLabels.put(i,
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:508</span>: <span class="message">Use new SparseArray&lt;List&lt;Double>>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno"> 505</span>   }
+<span class="lineno"> 506</span> 
+<span class="lineno"> 507</span>   protected Map&lt;Integer, List&lt;Double>> getYLabels(double[] minY, double[] maxY, int maxScaleNumber) {
+<span class="lineno"> 508</span>     Map&lt;Integer, List&lt;Double>> allYLabels = <span class="errorspan">new HashMap&lt;Integer, List&lt;Double>>();</span>
+<span class="lineno"> 509</span>     for (int i = 0; i &lt; maxScaleNumber; i++) {
+<span class="lineno"> 510</span>       allYLabels.put(i,
 </pre>
-<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:506</span>: <span class="message">Use new SparseArray&lt;List&lt;Double>>(...) instead for better performance</span><br /><pre class="errorlines">
-<span class="lineno"> 503</span>   }
-<span class="lineno"> 504</span> 
-<span class="lineno"> 505</span>   protected Map&lt;Integer, List&lt;Double>> getYLabels(double[] minY, double[] maxY, int maxScaleNumber) {
-<span class="lineno"> 506</span>     Map&lt;Integer, List&lt;Double>> allYLabels = <span class="errorspan">new HashMap&lt;Integer, List&lt;Double>>();</span>
-<span class="lineno"> 507</span>     for (int i = 0; i &lt; maxScaleNumber; i++) {
-<span class="lineno"> 508</span>       allYLabels.put(i,
+<span class="location"><a href="file:///Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java">/Users/derekshi/Documents/ref/achartengine/src/org/achartengine/chart/XYChart.java</a>:508</span>: <span class="message">Use new SparseArray&lt;List&lt;Double>>(...) instead for better performance</span><br /><pre class="errorlines">
+<span class="lineno"> 505</span>   }
+<span class="lineno"> 506</span> 
+<span class="lineno"> 507</span>   protected Map&lt;Integer, List&lt;Double>> getYLabels(double[] minY, double[] maxY, int maxScaleNumber) {
+<span class="lineno"> 508</span>     Map&lt;Integer, List&lt;Double>> allYLabels = <span class="errorspan">new HashMap&lt;Integer, List&lt;Double>>();</span>
+<span class="lineno"> 509</span>     for (int i = 0; i &lt; maxScaleNumber; i++) {
+<span class="lineno"> 510</span>       allYLabels.put(i,
 </pre>
 </div>
 <div class="metadata">Priority: 4 / 10<br/>

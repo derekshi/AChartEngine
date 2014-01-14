@@ -81,7 +81,8 @@ public class ColoredLineChart extends XYChart {
   	    outlinePath(canvas, paint);
         
 	    if (renderer.isPointed()){
-	        int l = points.size();
+            int l = points.size();
+
 	        paint.setStyle(Style.FILL);
 	        paint.setColor(renderer.getPointFillColor());
 	        canvas.drawCircle(points.get(l-2), points.get(l-1), renderer.getPointSize(), paint);
@@ -89,6 +90,7 @@ public class ColoredLineChart extends XYChart {
 	        paint.setStrokeWidth(3f);
 	        paint.setColor(seriesRenderer.getColor());
 	        canvas.drawCircle(points.get(l-2), points.get(l-1), renderer.getPointSize(), paint);
+
 	    }
 	    
 	}

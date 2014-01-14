@@ -115,6 +115,8 @@ public class XYMultipleSeriesRenderer extends DefaultRenderer {
 
     private int mAnnotationColor = Color.argb(100, 200, 200, 200);
 
+    private int mAnnotationLineColor = Color.argb(100, 209, 21, 78);
+
     public float getAnnotationLabelSize() {
         return mAnnotationLabelSize;
     }
@@ -129,6 +131,15 @@ public class XYMultipleSeriesRenderer extends DefaultRenderer {
 
     public void setAnnotationColor(int annotationColor) {
         this.mAnnotationColor = annotationColor;
+    }
+
+
+    public int getAnnotationLineColor() {
+        return mAnnotationLineColor;
+    }
+
+    public void setAnnotationLineColor(int annotationLineColor) {
+        this.mAnnotationLineColor = annotationLineColor;
     }
 
     /**

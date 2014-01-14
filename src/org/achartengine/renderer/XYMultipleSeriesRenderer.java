@@ -111,7 +111,27 @@ public class XYMultipleSeriesRenderer extends DefaultRenderer {
   /** The zoom in limit permitted in the axis Y */
   private double mZoomInLimitY = 0;
 
-  /**
+    private float mAnnotationLabelSize = 20;
+
+    private int mAnnotationColor = Color.argb(100, 200, 200, 200);
+
+    public float getAnnotationLabelSize() {
+        return mAnnotationLabelSize;
+    }
+
+    public void setAnnotationLabelSize(float annotationLabelSize) {
+        this.mAnnotationLabelSize = annotationLabelSize;
+    }
+
+    public int getAnnotationColor() {
+        return mAnnotationColor;
+    }
+
+    public void setAnnotationColor(int annotationColor) {
+        this.mAnnotationColor = annotationColor;
+    }
+
+    /**
    * An enum for the XY chart orientation of the X axis.
    */
   public enum Orientation {

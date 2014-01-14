@@ -3,19 +3,15 @@ package org.achartengine.chart;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.*;
 import android.util.Log;
 import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RectF;
 
 /**
  * ColoredLineChart is similar to CubicLineChart 
@@ -97,8 +93,26 @@ public class ColoredLineChart extends XYChart {
 	    
 	}
 
+//    @Override
+//    public void drawAnnotations(Canvas canvas, XYSeries series, float left, float bottom,
+//                                   double xPixelsPerUnit, double yPixelsPerUnit, double minX, double minY, Paint paint) {
+//        int count = series.getAnnotationCount();
+//        if (count > 0) {
+//            paint.setColor(mRenderer.getLabelsColor());
+//            float size = mRenderer.getAnnotationLabelSize();
+//            Log.d(TAG, "size: " + size);
+//            paint.setTextSize(size);
+//            for (int j = 0; j < count; j++) {
+//                float xS = (float) (left + xPixelsPerUnit
+//                        * (series.getAnnotationX(j) - minX) - series.getAnnotationAt(j).length()*size);
+//                float yS = (float) (bottom - yPixelsPerUnit
+//                        * (series.getAnnotationY(j) - minY));
+//                canvas.drawText(series.getAnnotationAt(j), xS, yS, paint);
+//            }
+//        }
+//    }
 
-	@Override
+    @Override
 	  protected ClickableArea[] clickableAreasForPoints(List<Float> points, List<Double> values,
 	      float yAxisValue, int seriesIndex, int startIndex) {
 	    int length = points.size();

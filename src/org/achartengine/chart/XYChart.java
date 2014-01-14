@@ -312,23 +312,22 @@ public abstract class XYChart extends AbstractChart {
           }
         }
 
-        //Draw annotations
-        int count = series.getAnnotationCount();
-        if (count > 0) {
-          paint.setColor(mRenderer.getLabelsColor());
-          Rect bound = new Rect();
-          for (int j = 0; j < count; j++) {
-            float xS = (float) (left + xPixelsPerUnit[scale]
-                * (series.getAnnotationX(j) - minX[scale]));
-            float yS = (float) (bottom - yPixelsPerUnit[scale]
-                * (series.getAnnotationY(j) - minY[scale]));
-            paint.getTextBounds(series.getAnnotationAt(j), 0, series.getAnnotationAt(j).length(),
-                bound);
-            if (xS < (xS + bound.width()) && yS < canvas.getHeight()) {
-              drawString(canvas, series.getAnnotationAt(j), xS, yS, paint);
-            }
-          }
-        }
+//        int count = series.getAnnotationCount();
+//        if (count > 0) {
+//          paint.setColor(mRenderer.getLabelsColor());
+//          Rect bound = new Rect();
+//          for (int j = 0; j < count; j++) {
+//            float xS = (float) (left + xPixelsPerUnit[scale]
+//                * (series.getAnnotationX(j) - minX[scale]));
+//            float yS = (float) (bottom - yPixelsPerUnit[scale]
+//                * (series.getAnnotationY(j) - minY[scale]));
+//            paint.getTextBounds(series.getAnnotationAt(j), 0, series.getAnnotationAt(j).length(),
+//                bound);
+//            if (xS < (xS + bound.width()) && yS < canvas.getHeight()) {
+//              drawString(canvas, series.getAnnotationAt(j), xS, yS, paint);
+//            }
+//          }
+//        }
 
         //Draw data points
         if (points.size() > 0) {
@@ -337,6 +336,10 @@ public abstract class XYChart extends AbstractChart {
               yAxisValue, i, startIndex);
           clickableArea.addAll(Arrays.asList(clickableAreasForSubSeries));
         }
+
+        //Draw annotations
+        drawAnnotations(canvas, series, left, bottom, xPixelsPerUnit[scale], yPixelsPerUnit[scale],
+                minX[scale], minY[scale], paint);
       }
     }
     // draw stuff over the margins such as data doesn't render on these areas
@@ -368,9 +371,6 @@ public abstract class XYChart extends AbstractChart {
         paint.setColor(mRenderer.getXLabelsColor());
         paint.setTextSize(mRenderer.getLabelsTextSize());
         paint.setTextAlign(mRenderer.getXLabelsAlign());
-//        if (mRenderer.getXLabelsAlign() == Align.LEFT) {
-//          xLabelsLeft += mRenderer.getLabelsTextSize() / 4;
-//        }
       }
       drawXLabels(xLabels, mRenderer.getXTextLabelLocations(), canvas, paint, xLabelsLeft, top,
           bottom, xPixelsPerUnit[0], minX[0], maxX[0]);
@@ -477,6 +477,27 @@ public abstract class XYChart extends AbstractChart {
     }
 
     
+  }
+
+  protected void drawAnnotations(Canvas canvas, XYSeries series, float left, float bottom,
+                 double xPixelsPerUnit, double yPixelsPerUnit, double minX, double minY, Paint paint) {
+      int count = series.getAnnotationCount();
+      if (count > 0) {
+          paint.setColor(mRenderer.getAnnotationColor());
+          paint.setTextSize(mRenderer.getAnnotationLabelSize());
+          Rect bound = new Rect();
+          for (int j = 0; j < count; j++) {
+              float xS = (float) (left + xPixelsPerUnit
+                      * (series.getAnnotationX(j) - minX));
+              float yS = (float) (bottom - yPixelsPerUnit
+                      * (series.getAnnotationY(j) - minY));
+              paint.getTextBounds(series.getAnnotationAt(j), 0, series.getAnnotationAt(j).length(),
+                      bound);
+              if (xS < (xS + bound.width()) && yS < canvas.getHeight()) {
+                  drawString(canvas, series.getAnnotationAt(j), xS, yS, paint);
+              }
+          }
+      }
   }
 
   protected List<Double> getXLabels(double min, double max, int count) {

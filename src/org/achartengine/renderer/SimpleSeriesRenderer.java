@@ -58,6 +58,7 @@ public class SimpleSeriesRenderer implements Serializable {
   /** If the bounding points to the first and last visible ones should be displayed. */
   private boolean mDisplayBoundingPoints = true;
 
+
   /**
    * Returns the series color.
    * 
@@ -332,5 +333,6 @@ public class SimpleSeriesRenderer implements Serializable {
   public void setChartValuesFormat(NumberFormat format) {
     mChartValuesFormat = format;
   }
+
 
 }
